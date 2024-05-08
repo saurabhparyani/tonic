@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap");
 
 * {
   margin: 0;
@@ -7,53 +7,45 @@
 }
 
 body {
-  .ubuntu-light {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-  }
+  font-family: "Manrope", sans-serif;
+}
 
-  .ubuntu-regular {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  border: 1px solid #181a1e;
+  opacity: 100% !important;
+  background: #fff !important;
 
-  .ubuntu-medium {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
+}
 
-  .ubuntu-bold {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  }
+.swiper-pagination-bullet-active {
 
-  .ubuntu-light-italic {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-  }
+  background: #0067ff !important;
+  border: none !important
+}
 
-  .ubuntu-regular-italic {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  }
+.swiper {
+  padding-bottom: 70px !important;
 
-  .ubuntu-medium-italic {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-  }
+}
 
-  .ubuntu-bold-italic {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-  }
+/*#0067ff;*/
+.swiper-slide.swiper-slide-next {
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0px 20px 70px rgba(0, 103, 255, 0.3) !important;
+}
+
+.swiper-slide.swiper-slide-next h4,
+.swiper-slide.swiper-slide-next p {
+
+  color: #807d7d !important;
+
+}
+
+.swiper-pagination {
+  top: 90% !important;
 
 }
 
@@ -97,6 +89,11 @@ body {
   .show__menu {
     display: block;
   }
+}
+
+.container {
+  position: relative;
+  width: 100%
 }
 
 @media only screen and (max-width: 935px) {
