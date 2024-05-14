@@ -69,8 +69,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="pb-16 pt-10">
-      <div className="container">
+    <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+      <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="flex justify-between flex-col md:flex-row flex-wrap gap-[30px]">
           <div>
             <img className="h-20 w-60" src={logo} alt="logo" />
@@ -80,6 +80,7 @@ const Footer = () => {
               {socialLinks.map((link, index) => (
                 <Link
                   to={link.path}
+                  target="_blank"
                   key={index}
                   className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none"
                 >
