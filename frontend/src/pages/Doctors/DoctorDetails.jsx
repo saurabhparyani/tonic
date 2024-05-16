@@ -67,7 +67,7 @@ const DoctorDetails = () => {
                       >
                         <img src={starIcon} alt="" />
                         {/* <LiaCertificateSolid className="w-12 h-8 bg-blue-500" /> */}
-                        {avgRating}
+                        {avgRating != undefined ? avgRating.toFixed(2) : 0}
                       </span>
 
                       <span

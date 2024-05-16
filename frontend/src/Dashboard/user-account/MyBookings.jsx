@@ -18,15 +18,18 @@ const MyBookings = () => {
       {error && !loading && <Error errorMsg={error} />}
 
       {!loading && !error && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 mt-5 lg:grid-cols-2 gap-5">
           {appointments.map((doctor) => (
             <DoctorCard doctor={doctor} key={doctor._id} />
           ))}
         </div>
       )}
 
-      {!loading && !error && appointments.length === 0 &&
-        <h2 className="mt-5 text-center text-[20px] leading-7 font-semibold text-primaryColor">You did not book any doctor yet!</h2>}
+      {!loading && !error && appointments.length === 0 && (
+        <h2 className="mt-5 text-center text-[20px] leading-7 font-semibold text-primaryColor">
+          You did not book any doctor yet!
+        </h2>
+      )}
     </div>
   );
 };

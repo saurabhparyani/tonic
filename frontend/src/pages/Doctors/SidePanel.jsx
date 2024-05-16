@@ -1,11 +1,36 @@
 import React, { useState } from "react";
-// import { BASE_URL, token } from "../../config";
+import { BASE_URL, token } from "../../config";
 // import DatePicker from "react-datepicker";
 // import PayButton from "../../components/PayButton/PayButton";
 import { toast } from "react-toastify";
 import convertTime from "../../utils/convertTime";
 
 const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
+  const bookingHandler = async () => {
+    try {
+      const res = await fetch(
+        `${BASE_URL}/bookings/checkout-session/${doctorId}`,
+        {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message + "Please try again");
+      }
+
+      if (data.session.url) {
+        window.location.href = data.session.url;
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   // const [date, setDate] = useState(new Date());
   // const [openDates, setOpenDates] = useState([]);
   // const [showSlots, setShowSlots] = useState(false);
@@ -83,7 +108,8 @@ const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
       <div className="flex items-center justify-between py-2">
         <p className="text__para mt-0 font-semibold"> Consultation Fee :</p>
         <span className="text-[16px]  leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold mr-9">
-          {appointmentFee !== undefined ? `₹${appointmentFee}` : "Not added"}
+          {/* {appointmentFee !== undefined ? `₹${appointmentFee}` : "Not added"} */}
+          {appointmentFee} INR
         </span>
       </div>
       <div className="mt-[30px]">
@@ -138,7 +164,10 @@ const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
           </div>
         ) : null} */}
       </div>
-      <button className="btn px-2 w-full rounded-md font-semibold">
+      <button
+        onClick={bookingHandler}
+        className="btn px-2 w-full rounded-md font-semibold"
+      >
         Book Appointment
       </button>
       {/* <PayButton

@@ -1,54 +1,56 @@
-import logo from '../../assets/images/logo.png'
-import { useEffect, useRef, useContext } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { BiMenu } from 'react-icons/bi'
-import { authContext } from '../../context/AuthContext'
+import logo from "../../assets/images/logo.png";
+import { useEffect, useRef, useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { BiMenu } from "react-icons/bi";
+import { authContext } from "../../context/AuthContext";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const navLinks = [
   {
-    path: '/home',
-    display: 'Home'
+    path: "/home",
+    display: "Home",
   },
   {
-    path: '/doctors',
-    display: 'Find a Doctor'
+    path: "/doctors",
+    display: "Find a Doctor",
   },
   {
-    path: '/services',
-    display: 'Services'
+    path: "/services",
+    display: "Services",
   },
   {
-    path: '/contact',
-    display: 'Contact'
-  }
-]
+    path: "/contact",
+    display: "Contact",
+  },
+];
 
 const Header = () => {
-
-  const headerRef = useRef(null)
-  const menuRef = useRef(null)
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
   const { user, role, token } = useContext(authContext);
 
   const handleStickyHeader = () => {
-    window.addEventListener('scroll', () => {
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        headerRef.current.classList.add('sticky__header')
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headerRef.current.classList.add("sticky__header");
       } else {
-        headerRef.current.classList.remove('sticky__header')
-
+        headerRef.current.classList.remove("sticky__header");
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    handleStickyHeader()
+    handleStickyHeader();
 
-    return () => window.removeEventListener('scroll', handleStickyHeader)
-  })
+    return () => window.removeEventListener("scroll", handleStickyHeader);
+  });
 
   const toggleMenu = () => {
-    menuRef.current.classList.toggle('show__menu')
-  }
+    menuRef.current.classList.toggle("show__menu");
+  };
 
   return (
     <header className="header flex items-center" ref={headerRef}>
@@ -57,27 +59,27 @@ const Header = () => {
           {/* ========== logo ========== */}
           <Link to="/">
             <button>
-              <img className='h-24 w-72 mt-11' src={logo} alt="" />
+              <img className="h-24 w-72 mt-11" src={logo} alt="" />
             </button>
           </Link>
 
           {/* ========== menu ========== */}
-          <div className='navigation' ref={menuRef} onClick={toggleMenu}>
-            <ul className='menu flex items-center gap-[2.7rem]'>
-              {
-                navLinks.map((link, index) => <li key={index}>
+          <div className="navigation" ref={menuRef} onClick={toggleMenu}>
+            <ul className="menu flex items-center gap-[2.7rem]">
+              {navLinks.map((link, index) => (
+                <li key={index}>
                   <NavLink
                     to={link.path}
-                    className={navClass =>
+                    className={(navClass) =>
                       navClass.isActive
-                        ? 'text-primaryColor text-[16px] leading-7 font-[600] px-4 py-2 hover:bg-gray-100 hover:rounded-lg'
-                        : 'text-textColor text-[16px] leading-7 font-[500] px-4 py-2 hover:bg-gray-100 hover:rounded-lg'
+                        ? "text-primaryColor text-[16px] leading-7 font-[600] px-4 py-2 hover:bg-gray-100 hover:rounded-lg"
+                        : "text-textColor text-[16px] leading-7 font-[500] px-4 py-2 hover:bg-gray-100 hover:rounded-lg"
                     }
                   >
                     {link.display}
                   </NavLink>
-                </li>)
-              }
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -86,16 +88,25 @@ const Header = () => {
             {token && user ? (
               <div>
                 <Link
-                  to={`${role == "doctor"
-                    ? "/doctors/profile/me"
-                    : "/users/profile/me"
-                    }`}
+                  to={`${
+                    role == "doctor"
+                      ? "/doctors/profile/me"
+                      : "/users/profile/me"
+                  }`}
                 >
                   <figure className="w-[25px] h-[25px] rounded-full">
-                    <img
-                      src={user?.photo}
-                      className="w-full h-full rounded-full cursor-pointer"
-                    />
+                    {user?.photo ? (
+                      <img
+                        src={user.photo}
+                        className="w-full h-full rounded-full cursor-pointer"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "";
+                        }}
+                      />
+                    ) : (
+                      <FaRegUserCircle className="w-full h-full text-primaryColor cursor-pointer" />
+                    )}
                   </figure>
                   {/* <h2>{user?.name}</h2> */}
                 </Link>
@@ -111,11 +122,10 @@ const Header = () => {
               <BiMenu className="text-[30px] text-primaryColor" />
             </span>
           </div>
-
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

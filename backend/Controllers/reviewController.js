@@ -39,7 +39,7 @@ export const createReview = async (req, res) => {
             .status(200)
             .json({ success: true, data: savedReview, message: "Review submitted", data: savedReview });
     } catch (error) {
-        res.status(500).json({ success: false, message: err.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 // @desc     Update a specific review

@@ -1,6 +1,7 @@
+import axios from "axios";
 import { token } from "../config";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 const useFetchData = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -10,16 +11,15 @@ const useFetchData = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url, {
+        const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const result = await res.json();
-        if (!res.ok) {
-          throw new Error(result.message)
+        if (response.status !== 200) {
+          throw new Error(response.data.message);
         }
 
-        setData(result.data);
+        setData(response.data.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -29,6 +29,7 @@ const useFetchData = (url) => {
 
     fetchData();
   }, [url]);
+
   return { data, loading, error };
 };
 

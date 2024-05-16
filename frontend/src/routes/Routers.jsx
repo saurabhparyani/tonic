@@ -9,10 +9,11 @@ import DoctorDetails from "../pages/Doctors/DoctorDetails";
 import MyAccount from "../Dashboard/user-account/MyAccount";
 import Dashboard from "../Dashboard/doctor-account/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import CheckoutSuccess from "../pages/Doctors/CheckoutSuccess";
 export default function Routers() {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/services" element={<Services />} />
       <Route path="/register" element={<Signup />} />
@@ -20,6 +21,8 @@ export default function Routers() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/doctors" element={<Doctors />} />
       <Route path="/doctors/:id" element={<DoctorDetails />} />
+      <Route path="/checkout-success" element={<CheckoutSuccess />} />
+
       <Route
         path="/users/profile/me"
         element={
