@@ -24,6 +24,10 @@ export const authenticate = async (req, res, next) => {
         req.userId = decoded.id;
         req.role = decoded.role;
 
+        if (req.role === 'doctor') {
+            req.doctorId = decoded.id;
+        }
+
         next();
     } catch (error) {
         if (error.name === "TokenExpireError") {

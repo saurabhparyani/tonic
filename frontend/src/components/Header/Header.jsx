@@ -94,7 +94,7 @@ const Header = () => {
                   <figure className="w-[25px] h-[25px] rounded-full">
                     <img
                       src={user?.photo}
-                      className="w-full rounded-full cursor-auto"
+                      className="w-full h-full rounded-full cursor-pointer"
                     />
                   </figure>
                   {/* <h2>{user?.name}</h2> */}

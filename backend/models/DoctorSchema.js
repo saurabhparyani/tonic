@@ -6,18 +6,18 @@ const DoctorSchema = new mongoose.Schema({
   name: { type: String, required: true },
   phone: { type: Number },
   photo: { type: String },
-  ticketPrice: { type: Number },
+  appointmentFee: { type: Number },
   role: {
     type: String,
   },
 
   // Fields for doctors only
-  specialization: { type: String },
+  specialty: { type: String },
   qualifications: {
     type: Array,
   },
 
-  experiences: {
+  experience: {
     type: Array,
   },
 

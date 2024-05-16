@@ -11,7 +11,7 @@ export const updateDoctor = async (req, res) => {
                 $set: req.body,
             },
             { new: true }
-        ).select("-password");;
+        ).select("-password");
 
         res.status(200).json({
             success: true,
@@ -70,7 +70,7 @@ export const getAllDoctors = async (req, res) => {
                 isApproved: "approved",
                 $or: [
                     { name: { $regex: query, $options: "i" } },
-                    { specialization: { $regex: query, $options: "i" } },
+                    { specialty: { $regex: query, $options: "i" } },
                 ],
             }).select("-password");
         }
