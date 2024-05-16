@@ -42,7 +42,8 @@ const Dashboard = () => {
                   </svg>
                   <span className="sr-only">Info</span>
                   <div className="ml-3 text-sm font-medium">
-                    To get approved, please complete your profile. Our team will manually review your profile and approve within 3 days.
+                    To get approved, please complete your profile. Our team will
+                    manually review your profile and approve within 3 days.
                   </div>
                 </div>
               )}
@@ -51,7 +52,11 @@ const Dashboard = () => {
                   <div>
                     <div className="flex items-center gap-4 mb-10">
                       <figure className="max-w-[200px] max-h-[200px]">
-                        <img src={data?.photo} alt="" className="w-full rounded-lg" />
+                        <img
+                          src={data?.photo}
+                          alt=""
+                          className="w-full rounded-lg"
+                        />
                       </figure>
                       <div>
                         <span className="bg-[#CCF0F3] text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 rounded text-[12px] leading-4 lg:text-[16px] lg:leading-6 font-semibold">
@@ -63,7 +68,7 @@ const Dashboard = () => {
                         <div className="flex items-center gap-[6px]">
                           <span className="flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                             <img src={starIcon} alt="" />
-                            {data.averageRating}
+                            {data.avgRating}
                           </span>
                           <span className=" text-textColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                             ({data.totalRating})
@@ -82,7 +87,9 @@ const Dashboard = () => {
                     />
                   </div>
                 )}
-                {tab === "appointments" && <Appointments appointments={data.appointments} />}
+                {tab === "appointments" && (
+                  <Appointments appointments={data.appointments} />
+                )}
                 {tab === "settings" && <Profile doctorData={data} />}
               </div>
             </div>

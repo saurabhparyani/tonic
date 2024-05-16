@@ -29,7 +29,7 @@ const DoctorDetails = () => {
     appointmentFee,
     qualifications,
     reviews,
-    averageRating,
+    avgRating,
     totalRating,
     experience,
     timeSlots,
@@ -67,7 +67,7 @@ const DoctorDetails = () => {
                       >
                         <img src={starIcon} alt="" />
                         {/* <LiaCertificateSolid className="w-12 h-8 bg-blue-500" /> */}
-                        {averageRating}
+                        {avgRating}
                       </span>
 
                       <span
@@ -91,7 +91,7 @@ const DoctorDetails = () => {
                       text-textColor "
                                     >
                                         (
-                                        {parseFloat(details.averageRating).toFixed(2)})
+                                        {parseFloat(details.avgRating).toFixed(2)})
                                     </span>
                                 </div> */}
 

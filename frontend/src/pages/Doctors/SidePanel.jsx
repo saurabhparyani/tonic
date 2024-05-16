@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import DatePicker from "react-datepicker";
 // import PayButton from "../../components/PayButton/PayButton";
 import { toast } from "react-toastify";
+import convertTime from "../../utils/convertTime";
 
 const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
   // const [date, setDate] = useState(new Date());
@@ -106,10 +107,10 @@ const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
           {timeSlots?.map((item, index) => (
             <li key={index} className="flex items-center justify-between py-2">
               <p className="text-[15px] leading-6 text-textColor font-semibold">
-                {item.day}
+                {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
               </p>
               <p className="text-[15px] leading-6 text-textColor font-semibold">
-                {item.startingTime} - {item.endingTime}
+                {convertTime(item.startingTime)} -{convertTime(item.endingTime)}
               </p>
             </li>
           ))}
