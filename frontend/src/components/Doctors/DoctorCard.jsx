@@ -23,7 +23,7 @@ const DoctorCard = ({ doctor }) => {
             {specialty}
           </span>
           <Link
-            to="/doctors"
+            to={`/doctors`}
             className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex  items-center justify-center group  hover:bg-primaryColor hover:border-none"
           >
             <BsArrowRight className="group-hover:text-white w-6 h-5" />
