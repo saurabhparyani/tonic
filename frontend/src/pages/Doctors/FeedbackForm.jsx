@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-// import { BASE_URL, token } from "../../config";
+import { useParams } from "react-router-dom";
+import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState(" ");
+  const [loading, setLoading] = useState(false);
+
+  const { id } = useParams();
   // const user = JSON.parse(localStorage.getItem("PatientInfo"));
   // const reviewData = {
   //   rating,
@@ -17,6 +22,7 @@ const FeedbackForm = () => {
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
+    setLoading(true);
     //   if (rating === 0) {
     //     console.log("hASGhj");
     //     toast.error("Please provide a rating");
@@ -29,29 +35,36 @@ const FeedbackForm = () => {
     //     return;
     //   }
 
-    //   try {
-    //     const res = await fetch(`${BASE_URL}/reviews/createReview`, {
-    //       method: "post",
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ review: reviewData }),
-    //     });
+    try {
+      if (!rating || !reviewText) {
+        setLoading(false);
+        return toast.error("Rating and review fields are required");
+      }
+      const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      });
 
-    //     let result = await res.json();
+      const result = await res.json();
 
-    //     if (!res.ok) {
-    //       throw new Error(result.message);
-    //     }
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
 
-    //     setshowFeedbackForm(false);
+      setLoading(false);
 
-    //     toast.success(result.message);
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error(result.message);
-    //   }
+      // setshowFeedbackForm(false);
+
+      toast.success(result.message);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error(error.message);
+    }
   };
   return (
     <form action="">
@@ -67,10 +80,11 @@ const FeedbackForm = () => {
               <button
                 key={index}
                 type="button"
-                className={`${index <= ((rating && hover) || hover)
-                  ? "text-yellowColor animate-blink"
-                  : "text-gray-400"
-                  }bg-transperant border-none outline-none text-[22px] cursor-pointer`}
+                className={`${
+                  index <= ((rating && hover) || hover)
+                    ? "text-yellowColor animate-blink"
+                    : "text-gray-400"
+                }bg-transperant border-none outline-none text-[22px] cursor-pointer`}
                 onClick={() => setRating(index)}
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(rating)}
@@ -98,7 +112,7 @@ const FeedbackForm = () => {
         ></textarea>
       </div>
       <button type="submit" className="btn" onClick={handleSubmitReview}>
-        Submit Feedback
+        {loading ? <HashLoader size={25} color="#fff" /> : `Submit Feedback`}
       </button>
     </form>
   );

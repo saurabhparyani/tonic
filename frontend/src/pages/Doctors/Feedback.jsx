@@ -11,7 +11,7 @@ import { MdDeleteSweep } from "react-icons/md";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 // import Pagination from "../../components/pagination/Pagination";
-const Feedback = () => {
+const Feedback = ({ reviews, totalRating }) => {
   const [showFeedbackForm, setshowFeedbackForm] = useState(false);
   //   const [reviews, setReview] = useState([]);
   //   const user = JSON.parse(localStorage.getItem("PatientInfo"));
@@ -143,34 +143,35 @@ const Feedback = () => {
       <div>
         <div className="mb-[50px ]">
           <h4 className="text-[20px] leading-[30px] font-bold text-headingColor mb-[30px]">
-            All Reviews (272)
+            All Reviews ({totalRating})
           </h4>
-          {/* {currentReviews.map((el, index) => ( */}
-          <div /* key={index} */ className="flex justify-between gap-10 mb-[30px]">
-            <div className="flex gap-3">
-              <figure className="w-10 h-10 rounded-full ">
-                <img className="w-full" src={avatar} alt="" />
-              </figure>
 
-              <div>
-                <h5 className="text-[16px] leading-6 text-primaryColor font-bold">
-                  Wayne Collins
-                </h5>
-                <p className="text-[14px] leading-6 text-textColor ">
-                  {FormateDate("02-04-2023")}
-                </p>
-                <p className="text_para mt-3 font-medium text-[15px] ">
-                  Good services, highly recommended
-                </p>
+          {reviews?.map((review, index) => (
+            <div key={index} className="flex justify-between gap-10 mb-[30px]">
+              <div className="flex gap-3">
+                <figure className="w-10 h-10 rounded-full ">
+                  <img className="w-full" src={review?.user?.photo} alt="" />
+                </figure>
+
+                <div>
+                  <h5 className="text-[16px] leading-6 text-primaryColor font-bold">
+                    {review?.user?.name}
+                  </h5>
+                  <p className="text-[14px] leading-6 text-textColor ">
+                    {FormateDate(review?.createdAt)}
+                  </p>
+                  <p className="text_para mt-3 font-medium text-[15px] ">
+                    {review.reviewText}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="flex gap-1">
-              {[...Array(5).keys()].map((_, index) => (
-                <AiFillStar key={index} color="#FFAD01" />
-              ))}
+              <div className="flex gap-1">
+                {[...Array(review?.rating).keys()].map((_, index) => (
+                  <AiFillStar key={index} color="#FFAD01" />
+                ))}
 
-              {/* {user.id === el.user.id && (
+                {/* {user.id === el.user.id && (
                   <div
                     onClick={() => handleEditReview(el._id, el.reviewText)}
                     className="flex justify-center items-center mt-7 text-[19px] hover:scale-125 hover:text-red-500 transition ease-in-out"
@@ -187,9 +188,9 @@ const Feedback = () => {
                     <MdDeleteSweep />
                   </div>
                 )} */}
+              </div>
             </div>
-          </div>
-          {/* ))} */}
+          ))}
         </div>
 
         {!showFeedbackForm && (

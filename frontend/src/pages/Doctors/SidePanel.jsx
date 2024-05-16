@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // import PayButton from "../../components/PayButton/PayButton";
 import { toast } from "react-toastify";
 
-const SidePanel = () => {
+const SidePanel = ({ doctorId, appointmentFee, timeSlots }) => {
   // const [date, setDate] = useState(new Date());
   // const [openDates, setOpenDates] = useState([]);
   // const [showSlots, setShowSlots] = useState(false);
@@ -82,11 +82,7 @@ const SidePanel = () => {
       <div className="flex items-center justify-between py-2">
         <p className="text__para mt-0 font-semibold"> Consultation Fee :</p>
         <span className="text-[16px]  leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold mr-9">
-          {/* {`₹${details.details.fee}`} */}
-          {/* {details.details.fee !== undefined
-            ? `₹${details.details.fee}`
-            : "Not added"} */}
-          2000 INR
+          {appointmentFee !== undefined ? `₹${appointmentFee}` : "Not added"}
         </span>
       </div>
       <div className="mt-[30px]">
@@ -107,32 +103,17 @@ const SidePanel = () => {
           highlightDates={highlightDates}
         /> */}
         <ul className="mt-3">
-          <li className="flex items-center justify-between py-2">
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              Sunday
-            </p>
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              4:00 PM - 9:00 PM
-            </p>
-          </li>
-          <li className="flex items-center justify-between py-2">
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              Sunday
-            </p>
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              4:00 PM - 9:00 PM
-            </p>
-          </li>
-          <li className="flex items-center justify-between py-2">
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              Sunday
-            </p>
-            <p className="text-[15px] leading-6 text-textColor font-semibold">
-              4:00 PM - 9:00 PM
-            </p>
-          </li>
+          {timeSlots?.map((item, index) => (
+            <li key={index} className="flex items-center justify-between py-2">
+              <p className="text-[15px] leading-6 text-textColor font-semibold">
+                {item.day}
+              </p>
+              <p className="text-[15px] leading-6 text-textColor font-semibold">
+                {item.startingTime} - {item.endingTime}
+              </p>
+            </li>
+          ))}
         </ul>
-
 
         {/* <button
           onClick={() => searchSlots()}
@@ -156,7 +137,9 @@ const SidePanel = () => {
           </div>
         ) : null} */}
       </div>
-      <button className="btn px-2 w-full rounded-md font-semibold">Book Appointment</button>
+      <button className="btn px-2 w-full rounded-md font-semibold">
+        Book Appointment
+      </button>
       {/* <PayButton
         docDetails={details}
         date={date}

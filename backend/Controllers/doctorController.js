@@ -73,11 +73,9 @@ export const getAllDoctors = async (req, res) => {
                     { specialty: { $regex: query, $options: "i" } },
                 ],
             }).select("-password");
+        } else {
+            doctors = await Doctor.find({ isApproved: "approved" }).select("-password");
         }
-
-        doctors = await Doctor.find({ isApproved: "approved" }).select(
-            "-password"
-        );
 
         res.status(200).json({
             success: true,
