@@ -8,8 +8,10 @@ import userRoute from "./Routes/user.js";
 import doctorRoute from "./Routes/doctors.js";
 import reviewRoute from "./Routes/review.js";
 import bookingRoute from "./Routes/booking.js"
+import job from "./cron.js";
 
 dotenv.config();
+job.start();
 
 const app = express();
 
